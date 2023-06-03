@@ -1,3 +1,3 @@
 # Algocpp.Type
 
-Algocpp.Type
+Algocpp type relationship library

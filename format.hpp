@@ -8,6 +8,8 @@
 #include <vector>
 #include <utility>
 #include <set>
+#include <locale>
+#include <codecvt>
 
 #ifndef ALGOCPP_TYPE_FORMAT
 #define ALGOCPP_TYPE_FORMAT
@@ -16,6 +18,7 @@ namespace algocpp
 {
 	namespace type
 	{
+		// Symple Type
 		inline std::string format(std::string x)
 		{
 			return "\"" + x + "\"";
@@ -31,6 +34,61 @@ namespace algocpp
 			return std::string{'\'', x, '\''};
 		}
 
+		inline std::string format(std::u32string x)
+		{
+			std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> utf32conv;
+
+			std::string result = utf32conv.to_bytes(x);
+			return "\"" + result + "\"";
+		}
+
+		inline std::string format(char32_t x)
+		{
+			std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> utf32conv;
+
+			std::string result = utf32conv.to_bytes(std::u32string{x});
+			return "\'" + result + "\'";
+		}
+
+		inline std::string format(long long x)
+		{
+			return std::to_string(x);
+		}
+
+// Boost.Multiprecision
+#ifdef BOOST_MP_CPP_INT_HPP
+		inline std::string format(boost::multiprecision::int1024_t x)
+		{
+			return x.str();
+		}
+
+		inline std::string format(boost::multiprecision::cpp_int x)
+		{
+			return x.str();
+		}
+
+		inline std::string format(boost::multiprecision::checked_int1024_t x)
+		{
+			return x.str();
+		}
+
+		inline std::string format(boost::multiprecision::checked_cpp_int x)
+		{
+			return x.str();
+		}
+
+		inline std::string format(boost::multiprecision::uint1024_t x)
+		{
+			return x.str();
+		}
+
+		inline std::string format(boost::multiprecision::checked_uint1024_t x)
+		{
+			return x.str();
+		}
+#endif
+
+		// Class
 		template <typename T>
 		inline std::string format(std::vector<T> x)
 		{
@@ -64,6 +122,22 @@ namespace algocpp
 					result += ", ";
 				i++;
 			}
+			return result + "}";
+		}
+
+		template <typename T1, typename T2>
+		inline std::string format(std::map<T1, T2> x)
+		{
+			std::string result = "{";
+			int i = 1;
+			for (auto a : x)
+			{
+				result += format(a.first) + ":" + format(a.second);
+				if (i != x.size())
+					result += ", ";
+				i++;
+			}
+
 			return result + "}";
 		}
 	}

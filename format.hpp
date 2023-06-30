@@ -4,15 +4,15 @@
 // This file is part of algocpp and is copyrighted by algocpp.
 // If used, it must comply with the MIT License.
 
+#ifndef ALGOCPP_TYPE_FORMAT
+#define ALGOCPP_TYPE_FORMAT
+
 #include <string>
 #include <vector>
 #include <utility>
 #include <set>
 #include <locale>
 #include <codecvt>
-
-#ifndef ALGOCPP_TYPE_FORMAT
-#define ALGOCPP_TYPE_FORMAT
 
 namespace algocpp
 {

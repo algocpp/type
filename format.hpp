@@ -13,7 +13,11 @@
 #include <set>
 #include <locale>
 #include <codecvt>
+#include <map>
 
+#if __has_include(<boost/multiprecision/cpp_int.hpp>)
+#include <boost/multiprecision/cpp_int.hpp>
+#endif
 namespace algocpp
 {
 	namespace type
@@ -119,7 +123,9 @@ namespace algocpp
 			{
 				result += format(a);
 				if (i != x.size())
+				{
 					result += ", ";
+				}
 				i++;
 			}
 			return result + "}";
@@ -134,7 +140,9 @@ namespace algocpp
 			{
 				result += format(a.first) + ":" + format(a.second);
 				if (i != x.size())
+				{
 					result += ", ";
+				}
 				i++;
 			}
 

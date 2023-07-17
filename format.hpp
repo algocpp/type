@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <tuple>
 #include <set>
 #include <locale>
 #include <codecvt>
@@ -57,6 +58,11 @@ namespace algocpp
 		inline std::string format(long long x)
 		{
 			return std::to_string(x);
+		}
+
+		inline std::string format(bool x)
+		{
+			return (x ? "true" : "false");
 		}
 
 // Boost.Multiprecision

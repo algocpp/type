@@ -15,6 +15,7 @@
 #include <locale>
 #include <codecvt>
 #include <map>
+#include <algocpp/string/wconvert.hpp>
 
 #if __has_include(<boost/multiprecision/cpp_int.hpp>)
 #include <boost/multiprecision/cpp_int.hpp>
@@ -41,19 +42,57 @@ namespace algocpp
 
 		inline std::string format(std::u32string x)
 		{
-			std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> utf32conv;
-
-			std::string result = utf32conv.to_bytes(x);
+			std::string result = algocpp::string::utf32conv.to_bytes(x);
 			return "\"" + result + "\"";
 		}
 
 		inline std::string format(char32_t x)
 		{
-			std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> utf32conv;
-
-			std::string result = utf32conv.to_bytes(std::u32string{x});
+			std::string result = algocpp::string::utf32conv.to_bytes(std::u32string{x});
 			return "\'" + result + "\'";
 		}
+
+		inline std::string format(std::u16string x)
+		{
+			std::string result = algocpp::string::utf16conv.to_bytes(x);
+			return "\"" + result + "\"";
+		}
+
+		inline std::string format(char16_t x)
+		{
+			std::string result = algocpp::string::utf16conv.to_bytes(std::u16string{x});
+			return "\'" + result + "\'";
+		}
+
+		inline std::string format(std::wstring x)
+		{
+			std::string result = algocpp::string::wstrconv.to_bytes(x);
+			return "\"" + result + "\"";
+		}
+
+		inline std::string format(wchar_t x)
+		{
+			std::string result = algocpp::string::wstrconv.to_bytes(std::wstring{x});
+			return "\'" + result + "\'";
+		}
+
+// C++20
+#if __cplusplus >= 202002LL
+
+		inline std::string format(std::u8string x)
+		{
+			std::string result = std::string(x.begin(), x.end());
+			return "\"" + result + "\"";
+		}
+
+		inline std::string format(char8_t x)
+		{
+			std::u8string tmp = {x};
+			std::string result = std::string(tmp.begin(), tmp.end());
+			return "\'" + result + "\'";
+		}
+
+#endif
 
 		inline std::string format(long long x)
 		{

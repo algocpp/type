@@ -7,7 +7,7 @@
 #ifndef ALGOCPP_TYPE_CTOI
 #define ALGOCPP_TYPE_CTOI
 
-#include <assert.h>
+#include <algocpp/exception/invaid_str.hpp>
 
 namespace algocpp
 {
@@ -15,8 +15,10 @@ namespace algocpp
 	{
 		inline int ctoi(char c)
 		{
-			assert(c >= '0' && c <= '9');
-			return (c - '0');
+			if (c >= '0' && c <= '9')
+				return (c - '0');
+			else
+				throw algocpp::exception::invaid_string("The character must be a one-byte number between 0 and 9.");
 		}
 	}
 }

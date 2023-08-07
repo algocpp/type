@@ -9,6 +9,8 @@
 
 #include <string>
 #include <vector>
+#include <array>
+#include <list>
 #include <utility>
 #include <tuple>
 #include <set>
@@ -142,11 +144,43 @@ namespace algocpp
 		inline std::string format(std::vector<T> x)
 		{
 			std::string result = "[";
-			for (int i = 0; i < x.size(); i++)
+			for (unsigned long long i = 0; i < x.size(); i++)
 			{
 				result += format(x[i]);
 				if (i != x.size() - 1)
 					result += ", ";
+			}
+
+			return result + "]";
+		}
+
+		template <typename T, std::size_t n>
+		inline std::string format(std::array<T, n> x)
+		{
+			std::string result = "[";
+			for (unsigned long long i = 0; i < x.size(); i++)
+			{
+				result += format(x[i]);
+
+				if (i != x.size() - 1)
+					result += ", ";
+			}
+
+			return result + "]";
+		}
+
+		template <typename T>
+		inline std::string format(std::list<T> x)
+		{
+			std::string result = "[";
+			unsigned long long i = 0;
+			for (auto a : x)
+			{
+				result += format(a);
+
+				if (i != x.size() - 1)
+					result += ", ";
+				i++;
 			}
 
 			return result + "]";
@@ -163,7 +197,7 @@ namespace algocpp
 		inline std::string format(std::set<T> x)
 		{
 			std::string result = "{";
-			int i = 1;
+			unsigned long long i = 1;
 			for (auto a : x)
 			{
 				result += format(a);
@@ -180,7 +214,7 @@ namespace algocpp
 		inline std::string format(std::map<T1, T2> x)
 		{
 			std::string result = "{";
-			int i = 1;
+			unsigned long long i = 1;
 			for (auto a : x)
 			{
 				result += format(a.first) + ":" + format(a.second);

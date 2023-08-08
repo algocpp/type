@@ -1,4 +1,4 @@
-
+﻿
 // algocpp/type/format.hpp
 //
 // This file is part of algocpp and is copyrighted by algocpp.
@@ -17,7 +17,9 @@
 #include <locale>
 #include <codecvt>
 #include <map>
+#include <queue>
 #include <algocpp/string/wconvert.hpp>
+#include <algocpp/type/format_declaration.hpp>
 
 #if __has_include(<boost/multiprecision/cpp_int.hpp>)
 #include <boost/multiprecision/cpp_int.hpp>
@@ -226,6 +228,23 @@ namespace algocpp
 			}
 
 			return result + "}";
+		}
+
+		template <typename T>
+		inline std::string format(std::queue<T> x)
+		{
+			std::string result = "<";
+			while (!x.empty())
+			{
+				result += format(x.front());
+
+				if (x.size() != 1)
+					result += ", ";
+
+				x.pop();
+			}
+
+			return result + ">";
 		}
 	}
 }

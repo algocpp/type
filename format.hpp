@@ -22,7 +22,7 @@
 #include <algocpp/string/wconvert.hpp>
 #include <algocpp/type/format_declaration.hpp>
 
-#if __has_include(<boost/multiprecision/cpp_int.hpp>)
+#if !defined(ALGOCPP_DONT_LIB) && __has_include(<boost/multiprecision/cpp_int.hpp>)
 #include <boost/multiprecision/cpp_int.hpp>
 #endif
 namespace algocpp

@@ -25,6 +25,11 @@
 #if !defined(ALGOCPP_DONT_LIB) && __has_include(<boost/multiprecision/cpp_int.hpp>)
 #include <boost/multiprecision/cpp_int.hpp>
 #endif
+
+#if !defined(ALGOCPP_DONT_LIB) && __has_include(<boost/array.hpp>)
+#include <boost/array.hpp>
+#endif
+
 namespace algocpp
 {
 	namespace type
@@ -264,6 +269,25 @@ namespace algocpp
 
 			return result + ">";
 		}
+
+#ifdef BOOST_ARRAY_HPP
+
+		template <typename T, std::size_t n>
+		inline std::string format(boost::array<T, n> x)
+		{
+			std::string result = "[";
+			for (unsigned long long i = 0; i < x.size(); i++)
+			{
+				result += format(x[i]);
+
+				if (i != x.size() - 1)
+					result += ", ";
+			}
+
+			return result + "]";
+		}
+
+#endif
 	}
 }
 

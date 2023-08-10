@@ -17,6 +17,10 @@
 #include <map>
 #include <queue>
 
+#if !defined(ALGOCPP_DONT_LIB) && __has_include(<boost/array.hpp>)
+#include <boost/array.hpp>
+#endif
+
 namespace algocpp
 {
 	namespace type
@@ -36,7 +40,7 @@ namespace algocpp
 		template <typename T>
 		inline std::string format(std::set<T> x);
 
-		template<typename T>
+		template <typename T>
 		inline std::string format(std::unordered_set<T> x);
 
 		template <typename T1, typename T2>
@@ -44,6 +48,14 @@ namespace algocpp
 
 		template <typename T>
 		inline std::string format(std::queue<T> x);
+
+// Boost.Array
+#ifdef BOOST_ARRAY_HPP
+
+		template <typename T, std::size_t n>
+		inline std::string format(boost::array<T, n> x);
+
+#endif
 	}
 }
 

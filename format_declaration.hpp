@@ -15,6 +15,7 @@
 #include <set>
 #include <unordered_set>
 #include <map>
+#include <unordered_map>
 #include <queue>
 
 #if !defined(ALGOCPP_DONT_LIB) && __has_include(<boost/array.hpp>)
@@ -45,6 +46,9 @@ namespace algocpp
 
 		template <typename T1, typename T2>
 		inline std::string format(std::map<T1, T2> x);
+
+		template <typename T1, typename T2>
+		inline std::string format(std::unordered_map<T1, T2> x);
 
 		template <typename T>
 		inline std::string format(std::queue<T> x);

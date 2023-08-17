@@ -18,6 +18,7 @@
 #include <set>
 #include <unordered_set>
 #include <map>
+#include <unordered_map>
 #include <queue>
 #include <algocpp/string/wconvert.hpp>
 #include <algocpp/type/format_declaration.hpp>
@@ -242,7 +243,25 @@ namespace algocpp
 			unsigned long long i = 1;
 			for (auto a : x)
 			{
-				result += format(a.first) + ":" + format(a.second);
+				result += format(a.first) + ": " + format(a.second);
+				if (i != x.size())
+				{
+					result += ", ";
+				}
+				i++;
+			}
+
+			return result + "}";
+		}
+
+		template <typename T1, typename T2>
+		inline std::string format(std::unordered_map<T1, T2> x)
+		{
+			std::string result = "{";
+			unsigned long long i = 1;
+			for (auto a : x)
+			{
+				result += format(a.first) + ": " + format(a.second);
 				if (i != x.size())
 				{
 					result += ", ";

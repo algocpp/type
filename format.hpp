@@ -220,6 +220,23 @@ namespace algocpp
 		}
 
 		template <typename T>
+		inline std::string format(std::multiset<T> x)
+		{
+			std::string result = "{";
+			unsigned long long i = 1;
+			for (auto a : x)
+			{
+				result += format(a);
+				if (i != x.size())
+				{
+					result += ", ";
+				}
+				i++;
+			}
+			return result + "}";
+		}
+
+		template <typename T>
 		inline std::string format(std::unordered_set<T> x)
 		{
 			std::string result = "{";

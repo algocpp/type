@@ -292,7 +292,7 @@ namespace algocpp
 		template <typename T>
 		inline std::string format(std::queue<T> x)
 		{
-			std::string result = "<";
+			std::string result = "{";
 			while (!x.empty())
 			{
 				result += format(x.front());
@@ -303,7 +303,7 @@ namespace algocpp
 				x.pop();
 			}
 
-			return result + ">";
+			return result + "}";
 		}
 
 #ifdef BOOST_ARRAY_HPP
